@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Zirong Should Learn Flask: Building Tomorrow's Digital Skills Today</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            text-align: center;
+            color: white;
+            padding: 60px 0;
+            margin-bottom: 40px;
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero .subtitle {
+            font-size: 1.4em;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .hero .course-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: bold;
+            backdrop-filter: blur(10px);
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .card-icon {
+            font-size: 3em;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            color: #4a5568;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .card p, .card ul {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .card ul {
+            padding-left: 20px;
+            word-wrap: break-word;
+        }
+
+        .card li {
+            margin-bottom: 8px;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .highlight h2 {
+            color: #2d3748;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .curriculum-overview {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #667eea;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding-left: 40px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 5px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #667eea;
+        }
+
+        .timeline-item h4 {
+            color: #4a5568;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .timeline-item p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .skill-item {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .cta {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 50px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .cta h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: transform 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2em;
+            }
+            
+            .hero h1:nth-of-type(2) {
+                font-size: 2em;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.1em;
+            }
+            
+            .hero .course-badge {
+                font-size: 0.9em;
+                padding: 12px 20px;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            .curriculum-overview {
+                padding: 25px 20px;
+            }
+            
+            .timeline {
+                padding-left: 20px;
+            }
+            
+            .timeline-item {
+                padding-left: 30px;
+            }
+            
+            .timeline-item h4 {
+                font-size: 1.1em;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .cta {
+                padding: 30px 20px;
+            }
+            
+            .cta h2 {
+                font-size: 1.8em;
+            }
+            
+            .highlight h2 {
+                font-size: 1.8em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .hero {
+                padding: 40px 0;
+            }
+            
+            .hero h1 {
+                font-size: 1.8em;
+            }
+            
+            .hero h1:nth-of-type(2) {
+                font-size: 1.6em;
+            }
+            
+            .hero .subtitle {
+                font-size: 1em;
+                margin-bottom: 20px;
+            }
+            
+            .hero .course-badge {
+                font-size: 0.8em;
+                padding: 10px 15px;
+            }
+            
+            .card {
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+            
+            .card h3 {
+                font-size: 1.3em;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .stat {
+                padding: 15px;
+            }
+            
+            .stat-number {
+                font-size: 2em;
+            }
+            
+            .curriculum-overview {
+                padding: 20px 15px;
+            }
+            
+            .timeline::before {
+                left: 10px;
+            }
+            
+            .timeline {
+                padding-left: 15px;
+            }
+            
+            .timeline-item {
+                padding-left: 25px;
+                margin-bottom: 25px;
+            }
+            
+            .timeline-item::before {
+                left: -5px;
+                width: 12px;
+                height: 12px;
+            }
+            
+            .timeline-item h4 {
+                font-size: 1em;
+                margin-bottom: 8px;
+            }
+            
+            .timeline-item p {
+                font-size: 0.9em;
+            }
+            
+            .skill-item {
+                padding: 15px;
+            }
+            
+            .skill-item h4 {
+                font-size: 1.1em;
+            }
+            
+            .cta {
+                padding: 25px 15px;
+            }
+            
+            .cta h2 {
+                font-size: 1.5em;
+                margin-bottom: 15px;
+            }
+            
+            .cta p {
+                font-size: 1em;
+                margin-bottom: 20px;
+            }
+            
+            .btn {
+                padding: 12px 20px;
+                font-size: 0.9em;
+                display: block;
+                text-align: center;
+                margin: 0 auto;
+            }
+            
+            .highlight {
+                padding: 20px 15px;
+            }
+            
+            .highlight h2 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>Zirong's Journey to Web Development</h1>
+            <h1 style="font-size: 2.8em; margin-top: 10px;">子荣的网页开发之旅</h1>
+            <p class="subtitle">Why the 18-Week Flask Curriculum is the Perfect Investment in Your Child's Future</p>
+            <p class="subtitle" style="font-size: 1.2em;">为什么18周Flask课程是对孩子未来的完美投资</p>
+            <div class="course-badge">
+                18 Weeks • Ages 12+ • Real Web Development Skills<br>
+                18周课程 • 12岁以上 • 真实网页开发技能
+            </div>
+        </div>
+
+        <!-- Key Benefits Grid -->
+        <div class="content-grid">
+            <div class="card">
+                <h3>Future-Ready Skills</h3>
+                <h3 style="color: #666; font-size: 1.2em; margin-bottom: 15px;">面向未来的技能</h3>
+                <p>Web development is one of the most in-demand skills in today's digital economy. By learning Flask (Python for web), Zirong will gain:</p>
+                <p style="color: #666; margin-bottom: 15px;">网页开发是当今数字经济中最受欢迎的技能之一。通过学习Flask（Python网页开发），子荣将获得：</p>
+                <ul>
+                    <li>Programming fundamentals that apply to all technology careers</li>
+                    <li style="color: #666;">适用于所有技术职业的编程基础</li>
+                    <li>Understanding of how websites and apps actually work</li>
+                    <li style="color: #666;">了解网站和应用程序的实际工作原理</li>
+                    <li>Problem-solving and logical thinking abilities</li>
+                    <li style="color: #666;">解决问题和逻辑思维能力</li>
+                    <li>Creative expression through building interactive projects</li>
+                    <li style="color: #666;">通过构建交互式项目进行创意表达</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Perfect Age & Timing</h3>
+                <h3 style="color: #666; font-size: 1.2em; margin-bottom: 15px;">完美的年龄和时机</h3>
+                <p>Research shows that ages 10+ is the ideal time to start learning programming concepts:</p>
+                <p style="color: #666; margin-bottom: 15px;">研究表明，12岁以上是开始学习编程概念的理想时间：</p>
+                <ul>
+                    <li>Abstract thinking skills are developing</li>
+                    <li style="color: #666;">抽象思维技能正在发展</li>
+                    <li>Natural curiosity about technology</li>
+                    <li style="color: #666;">对技术的天然好奇心</li>
+                    <li>Builds confidence before high school</li>
+                    <li style="color: #666;">在高中之前建立自信心</li>
+                    <li>Creates early advantage for STEM subjects</li>
+                    <li style="color: #666;">为STEM学科创造早期优势</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Hands-On Learning</h3>
+                <h3 style="color: #666; font-size: 1.2em; margin-bottom: 15px;">动手实践学习</h3>
+                <p>Unlike theoretical computer classes, this curriculum focuses on building real projects:</p>
+                <p style="color: #666; margin-bottom: 15px;">与理论计算机课程不同，本课程专注于构建真实项目：</p>
+                <ul>
+                    <li>Create actual websites that friends and family can visit</li>
+                    <li style="color: #666;">创建朋友和家人可以访问的真实网站</li>
+                    <li>Learn by doing, not just memorizing</li>
+                    <li style="color: #666;">通过实践学习，而不仅仅是记忆</li>
+                    <li>Each week builds on previous knowledge</li>
+                    <li style="color: #666;">每周都在之前的知识基础上构建</li>
+                    <li>Final project: Zirong's own website!</li>
+                    <li style="color: #666;">最终项目：子荣的专属网站！</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Career Foundation</h3>
+                <h3 style="color: #666; font-size: 1.2em; margin-bottom: 15px;">职业基础</h3>
+                <p>Web development skills open doors to numerous high-paying careers:</p>
+                <p style="color: #666; margin-bottom: 15px;">网页开发技能为众多高薪职业打开大门：</p>
+                <ul>
+                    <li>Web Developer ($50,000-$120,000+ annually)</li>
+                    <li style="color: #666;">网页开发工程师（年薪$50,000-$120,000+）</li>
+                    <li>Software Engineer</li>
+                    <li style="color: #666;">软件工程师</li>
+                    <li>UX/UI Designer</li>
+                    <li style="color: #666;">用户体验/界面设计师</li>
+                    <li>Entrepreneur/Tech Startup Founder</li>
+                    <li style="color: #666;">企业家/科技创业公司创始人</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Statistics Highlight -->
+        <div class="highlight">
+            <h2>Why Web Development Matters</h2>
+            <h2 style="color: #2d3748; font-size: 1.8em; margin-bottom: 20px;">为什么网页开发很重要</h2>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-number">73%</div>
+                    <p>of companies need web developers</p>
+                    <p style="color: #666;">的公司需要网页开发人员</p>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">8%</div>
+                    <p>job growth rate (faster than average)</p>
+                    <p style="color: #666;">工作增长率（高于平均水平）</p>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">$77k</div>
+                    <p>average starting salary</p>
+                    <p style="color: #666;">平均起薪</p>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">100%</div>
+                    <p>remote work opportunities</p>
+                    <p style="color: #666;">远程工作机会</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Curriculum Overview -->
+        <div class="curriculum-overview">
+            <h2 style="text-align: center; color: #4a5568; margin-bottom: 30px;">What Zirong Will Learn</h2>
+            <h2 style="text-align: center; color: #666; margin-bottom: 30px; font-size: 1.8em;">子荣将学到什么</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>Unit 1: Python Foundations (Weeks 1-4)</h4>
+                    <h4 style="color: #666; font-size: 1.1em;">第一单元：Python基础（第1-4周）</h4>
+                    <p>Master programming basics with Python - variables, loops, functions, and file handling. Build confidence with fun projects like games and interactive programs.</p>
+                    <p style="color: #666;">掌握Python编程基础 - 变量、循环、函数和文件处理。通过游戏和交互式程序等有趣项目建立信心。</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h4>Unit 2: Web Basics with Flask (Weeks 5-9)</h4>
+                    <h4 style="color: #666; font-size: 1.1em;">第二单元：Flask网页基础（第5-9周）</h4>
+                    <p>Learn how websites work! Create first web server, build multiple pages, and understand the magic behind every website Zirong visits.</p>
+                    <p style="color: #666;">了解网站如何工作！创建第一个网页服务器，构建多个页面，理解子荣访问的每个网站背后的奥秘。</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h4>Unit 3: Design with HTML & CSS (Weeks 10-12)</h4>
+                    <h4 style="color: #666; font-size: 1.1em;">第三单元：HTML和CSS设计（第10-12周）</h4>
+                    <p>Make websites beautiful! Learn to structure content with HTML and style it with CSS. Create professional-looking sites with consistent design.</p>
+                    <p style="color: #666;">让网站变得美丽！学习用HTML构建内容结构，用CSS进行样式设计。创建具有一致设计的专业外观网站。</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h4>Unit 4: Interactive Features (Weeks 13-16)</h4>
+                    <h4 style="color: #666; font-size: 1.1em;">第四单元：交互式功能（第13-16周）</h4>
+                    <p>Add dynamic functionality! Handle user input, create forms, and build interactive features that respond to users in real-time.</p>
+                    <p style="color: #666;">添加动态功能！处理用户输入，创建表单，构建实时响应用户的交互式功能。</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h4>Unit 5: Final Project (Weeks 17-18)</h4>
+                    <h4 style="color: #666; font-size: 1.1em;">第五单元：最终项目（第17-18周）</h4>
+                    <p>Build and present a complete website! Zirong will create their own unique web application and showcase it to family and friends.</p>
+                    <p style="color: #666;">构建并展示完整网站！子荣将创建属于自己的独特网页应用程序，并向家人和朋友展示。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skills Development -->
+        <div class="curriculum-overview">
+            <h2 style="text-align: center; color: #4a5568; margin-bottom: 30px;">Skills Zirong Will Develop</h2>
+            
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <h4>Technical Skills</h4>
+                    <p>Python programming, HTML/CSS, web server concepts, database basics, debugging, and testing</p>
+                </div>
+                
+                <div class="skill-item">
+                    <h4>Problem Solving</h4>
+                    <p>Breaking down complex problems, logical thinking, debugging code, and finding creative solutions</p>
+                </div>
+                
+                <div class="skill-item">
+                    <h4>Design Thinking</h4>
+                    <p>User experience design, visual layout, color theory, and creating intuitive interfaces</p>
+                </div>
+                
+                <div class="skill-item">
+                    <h4>Project Management</h4>
+                    <p>Planning projects, meeting deadlines, organizing code, and presenting completed work</p>
+                </div>
+                
+                <div class="skill-item">
+                    <h4>Communication</h4>
+                    <p>Explaining technical concepts, presenting projects, and collaborating with others</p>
+                </div>
+                
+                <div class="skill-item">
+                    <h4>Tool Proficiency</h4>
+                    <p>VS Code, Replit, version control basics, and professional development environments</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Why This Curriculum is Special -->
+        <div class="curriculum-overview">
+            <h2 style="text-align: center; color: #4a5568; margin-bottom: 30px;">Why This Curriculum Stands Out</h2>
+            
+            <div class="content-grid">
+                <div class="card">
+                    <h3>Age-Appropriate Progression</h3>
+                    <p>Carefully designed for beginners aged 12+, with concepts introduced at the perfect pace for learning and retention.</p>
+                </div>
+                
+                <div class="card">
+                    <h3>Real-World Tools</h3>
+                    <p>Uses professional tools like VS Code and modern frameworks like Flask - the same tools used by professional developers.</p>
+                </div>
+                
+                <div class="card">
+                    <h3>Modern & Relevant</h3>
+                    <p>Focuses on current web technologies and practices that are actively used in today's tech industry.</p>
+                </div>
+                
+                <div class="card">
+                    <h3>Portfolio Building</h3>
+                    <p>By the end, Zirong will have multiple projects to show colleges, employers, or anyone interested in their skills!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="cta">
+            <h2>Give Zirong the Gift of Tomorrow's Skills Today</h2>
+            <h2 style="font-size: 2em; margin-bottom: 20px;">今天就给子荣未来技能的礼物</h2>
+            <p>In just 18 weeks, Zirong will go from beginner to building their own websites. This isn't just learning to code - it's learning to think, create, and solve problems like a developer.</p>
+            <p style="margin-bottom: 30px;">仅仅18周，子荣就能从初学者成长为能够构建自己网站的开发者。这不仅仅是学习编程 - 而是学习像开发者一样思考、创造和解决问题。</p>
+            <p><strong>The question isn't whether Zirong can learn this - it's whether we'll give them the opportunity.</strong></p>
+            <p style="margin-bottom: 30px;"><strong>问题不在于子荣能否学会这些 - 而在于我们是否愿意给他们这个机会。</strong></p>
+            <a href="#" class="btn">Start Zirong's Journey Today / 今天开始子荣的学习之旅</a>
+        </div>
+
+        <!-- Final Benefits Summary -->
+        <div class="curriculum-overview">
+            <h2 style="text-align: center; color: #4a5568; margin-bottom: 30px;">What Parents Can Expect</h2>
+            
+            <div style="font-size: 1.1em; color: #666;">
+                <p style="margin-bottom: 15px;"><strong>Week 1:</strong> Zirong will be excited to show you their first Python program</p>
+                <p style="margin-bottom: 15px;"><strong>Week 5:</strong> They'll proudly demonstrate their first website running on their computer</p>
+                <p style="margin-bottom: 15px;"><strong>Week 10:</strong> You'll see their growing confidence as they style and design beautiful web pages</p>
+                <p style="margin-bottom: 15px;"><strong>Week 18:</strong> Zirong will present a complete website they built from scratch - something to be truly proud of!</p>
+                
+                <div style="background: #f0f8ff; padding: 20px; border-radius: 10px; margin-top: 30px; border-left: 4px solid #667eea;">
+                    <h4 style="color: #4a5568; margin-bottom: 10px;">The Best Part?</h4>
+                    <p>This isn't just about learning to code. It's about building confidence, logical thinking, creativity, and giving Zirong a head start in our increasingly digital world. The skills learned here will benefit them in ANY career path they choose.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
