@@ -31,6 +31,20 @@
             color: white;
             padding: 60px 0;
             margin-bottom: 40px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+        }
+
+        .hero .logo {
+            max-width: 160px;
+            width: 30%;
+            height: auto;
+            margin: 0 auto 20px auto;
+            display: block;
         }
 
         .hero h1 {
@@ -312,7 +326,7 @@
             }
             
             .hero {
-                padding: 40px 0;
+                padding: 28px 0;
             }
             
             .hero h1 {
@@ -431,6 +445,7 @@
     <div class="container">
         <!-- Hero Section -->
         <div class="hero">
+            <img src="1.png" alt="Eduable Logo" class="logo">
             <h1>Zirong's Journey to Web Development</h1>
             <h1 style="font-size: 2.8em; margin-top: 10px;">子荣的网页开发之旅</h1>
                 <p class="subtitle">Why the 16-Lesson Flask Curriculum is the Perfect Investment in Your Child's Future</p>
