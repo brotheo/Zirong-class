@@ -1,0 +1,790 @@
+<title>Strings Teacher Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one reading column on graph paper (same family as the 2D Arrays lesson); timed blocks follow the real 90-minute class order */
+:root {
+  --paper: #f5f7fb;
+  --sheet: #ffffff;
+  --ink: #16202f;
+  --muted: #586478;
+  --rule: #d8dfea;
+  --gridline: rgba(44, 85, 201, 0.07);
+  --accent: #2c55c9;
+  --accent-soft: #e3eafb;
+  --on-accent: #ffffff;
+  --mark: #a86a00;
+  --mark-soft: #fdf0d6;
+  --good: #1f7a4d;
+  --good-soft: #e1f3e9;
+  --bad: #b3261e;
+  --code-bg: #eef2f8;
+  --tk-key: #8a2fb3;
+  --tk-type: #2c55c9;
+  --tk-str: #1f7a4d;
+  --tk-num: #b5560b;
+  --tk-com: #6f7a8c;
+  --tk-fn: #0f6f86;
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0e131b; --sheet: #151c27; --ink: #e3e8f0; --muted: #97a2b4; --rule: #263142;
+    --gridline: rgba(125, 156, 255, 0.06); --accent: #86a3ff; --accent-soft: #1c2742; --on-accent: #0e131b;
+    --mark: #f2b33d; --mark-soft: #3a2c10; --good: #5cc98f; --good-soft: #13301f; --bad: #ff8a80; --code-bg: #111925;
+    --tk-key: #d29bff; --tk-type: #86a3ff; --tk-str: #7fd6a5; --tk-num: #f5a35b; --tk-com: #75819a; --tk-fn: #5fd0e6;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0e131b; --sheet: #151c27; --ink: #e3e8f0; --muted: #97a2b4; --rule: #263142;
+  --gridline: rgba(125, 156, 255, 0.06); --accent: #86a3ff; --accent-soft: #1c2742; --on-accent: #0e131b;
+  --mark: #f2b33d; --mark-soft: #3a2c10; --good: #5cc98f; --good-soft: #13301f; --bad: #ff8a80; --code-bg: #111925;
+  --tk-key: #d29bff; --tk-type: #86a3ff; --tk-str: #7fd6a5; --tk-num: #f5a35b; --tk-com: #75819a; --tk-fn: #5fd0e6;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background-color: var(--paper);
+  background-image: linear-gradient(var(--gridline) 1px, transparent 1px), linear-gradient(90deg, var(--gridline) 1px, transparent 1px);
+  background-size: 24px 24px;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+.wrap { max-width: 52rem; margin: 0 auto; padding-inline: 16px; padding-block: 2.5rem 4rem; }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.15; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(2.3rem, 7vw, 3.5rem); font-weight: 800; letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.45rem, 4vw, 1.85rem); font-weight: 800; letter-spacing: -0.01em; }
+h3 { font-size: 1.2rem; font-weight: 600; }
+h4 { margin: 0; font-size: 1rem; }
+p { margin: 0; max-width: 68ch; }
+a { color: var(--accent); }
+code { font-family: var(--font-mono); font-size: 0.88em; }
+:not(pre) > code { background: var(--code-bg); padding: 0.1em 0.35em; border-radius: 4px; }
+ul, ol { margin: 0; padding-left: 1.25rem; display: grid; gap: 0.3rem; max-width: 68ch; }
+.eyebrow { font-family: var(--font-mono); font-size: 0.76rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+
+header { display: grid; gap: 1rem; padding-bottom: 2rem; border-bottom: 2px solid var(--ink); }
+header h1 .q { color: var(--accent); font-family: var(--font-mono); font-weight: 600; font-size: 0.6em; vertical-align: 0.25em; letter-spacing: 0; }
+.lede { font-size: 1.15rem; color: var(--muted); }
+.meta { display: flex; flex-wrap: wrap; gap: 0.4rem 1.5rem; font-size: 0.93rem; color: var(--muted); }
+.meta b { color: var(--ink); }
+.panel { background: var(--sheet); border: 1px solid var(--rule); border-radius: 8px; padding: 1.1rem 1.25rem; display: grid; gap: 0.6rem; min-width: 0; }
+
+/* timeline */
+.timeline { display: grid; gap: 0; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; background: var(--sheet); }
+.tl { display: grid; grid-template-columns: 6.6rem 1fr auto; gap: 0.75rem; align-items: baseline; padding: 0.55rem 0.9rem; border-bottom: 1px solid var(--rule); }
+.tl:last-child { border-bottom: 0; }
+.tl .t { font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.tl .w { min-width: 0; }
+.tl .d { font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tl.work .w { font-weight: 700; }
+.tl.work { background: var(--accent-soft); }
+.bar { display: flex; height: 10px; border-radius: 99px; overflow: hidden; gap: 2px; }
+.bar span { background: var(--rule); }
+.bar span.work { background: var(--accent); }
+
+nav.toc { display: flex; flex-wrap: wrap; gap: 0.4rem; padding-block: 1.5rem; }
+nav.toc a { font-family: var(--font-mono); font-size: 0.8rem; text-decoration: none; color: var(--ink); border: 1px solid var(--rule); background: var(--sheet); padding: 0.3rem 0.6rem; border-radius: 999px; }
+nav.toc a:hover, nav.toc a:focus-visible { border-color: var(--accent); color: var(--accent); }
+
+main { display: grid; gap: 3.25rem; }
+section { display: grid; gap: 1rem; scroll-margin-top: 1rem; min-width: 0; }
+.sec-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem 0.75rem; }
+.clock { font-family: var(--font-mono); font-size: 0.78rem; font-weight: 600; color: var(--accent); border: 1.5px solid var(--accent); border-radius: 4px; padding: 0.05rem 0.45rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.part { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+
+pre { margin: 0; background: var(--code-bg); border: 1px solid var(--rule); border-radius: 8px; padding: 1rem 1.1rem; overflow-x: auto; font-size: 0.86rem; line-height: 1.6; tab-size: 4; }
+pre code { font-family: var(--font-mono); background: none; padding: 0; color: var(--ink); }
+pre.run { background: var(--sheet); border-style: dashed; }
+pre.run::before { content: attr(data-label); display: block; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+pre.run .in { color: var(--mark); font-weight: 600; }
+.token.comment { color: var(--tk-com); font-style: italic; }
+.token.keyword { color: var(--tk-key); }
+.token.string, .token.char { color: var(--tk-str); }
+.token.number, .token.boolean { color: var(--tk-num); }
+.token.function { color: var(--tk-fn); }
+.token.class-name, .token.builtin { color: var(--tk-type); }
+.token.macro, .token.directive, .token.property { color: var(--tk-key); }
+.token.operator, .token.punctuation { color: var(--muted); }
+
+.callout { border-left: 3px solid var(--mark); background: var(--mark-soft); padding: 0.85rem 1rem; border-radius: 0 6px 6px 0; display: grid; gap: 0.35rem; }
+.callout .eyebrow { color: var(--mark); }
+.callout.good { border-left-color: var(--good); background: var(--good-soft); }
+.callout.good .eyebrow { color: var(--good); }
+
+.tbl-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.94rem; }
+th, td { text-align: left; padding: 0.55rem 0.7rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+td code { white-space: nowrap; }
+td.num { font-variant-numeric: tabular-nums; font-family: var(--font-mono); font-size: 0.85rem; white-space: nowrap; }
+
+.ch { background: var(--sheet); border: 1px solid var(--rule); border-radius: 10px; padding: 1.2rem 1.25rem; display: grid; gap: 0.85rem; min-width: 0; }
+.ch-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.4rem 0.75rem; }
+.ch-head h3 { margin-right: auto; }
+.pill { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.12rem 0.5rem; border-radius: 4px; border: 1px solid currentColor; white-space: nowrap; }
+.pill.e { color: var(--good); }
+.pill.m { color: var(--mark); }
+.pill.h { color: var(--bad); }
+.pill.x { color: var(--accent); }
+.pill.time { color: var(--muted); }
+.skills { font-size: 0.9rem; color: var(--muted); }
+.tests { font-size: 0.95rem; }
+details { border-top: 1px dashed var(--rule); padding-top: 0.6rem; }
+details > summary { cursor: pointer; font-weight: 700; color: var(--accent); font-size: 0.95rem; }
+details[open] > summary { margin-bottom: 0.6rem; }
+details > div { display: grid; gap: 0.7rem; }
+summary:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.hint-list { display: grid; gap: 0.4rem; }
+
+.checklist { list-style: none; padding: 0; }
+.checklist label { display: flex; gap: 0.6rem; align-items: flex-start; cursor: pointer; }
+.checklist input { margin-top: 0.35rem; accent-color: var(--accent); width: 1rem; height: 1rem; flex-shrink: 0; }
+
+.lines { display: grid; gap: 0.25rem; }
+.lines span { display: block; height: 1.9rem; border-bottom: 1px solid var(--rule); }
+
+footer { margin-top: 3.5rem; padding-top: 1.25rem; border-top: 2px solid var(--ink); display: grid; gap: 0.35rem; color: var(--muted); font-size: 0.95rem; }
+
+@media (max-width: 520px) {
+  .tl { grid-template-columns: 1fr auto; }
+  .tl .t { grid-column: 1 / -1; }
+  .ch { padding: 1rem; }
+}
+
+/* Teacher edition: teal accent so it is never confused with the student page */
+:root { --accent: #0d7468; --accent-soft: #dcefeb; --gridline: rgba(13, 116, 104, 0.07); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --accent: #4fd1bd; --accent-soft: #10302b; --gridline: rgba(79, 209, 189, 0.06); } }
+:root[data-theme="dark"] { --accent: #4fd1bd; --accent-soft: #10302b; --gridline: rgba(79, 209, 189, 0.06); }
+.banner { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; align-items: center; justify-content: space-between; background: var(--accent); color: var(--on-accent); padding: 0.6rem 1rem; border-radius: 8px; font-weight: 700; }
+.banner a { color: var(--on-accent); }
+.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1rem; }
+.notes h4 { color: var(--accent); }
+.say { font-style: italic; }
+</style>
+
+<div class="wrap">
+<header>
+  <div class="banner"><span>Teacher guide · contains all solutions</span><a href="https://claude.ai/artifact/CkxSJUKzxP9wvcJTP4YK2g" target="_blank" rel="noopener">Open the student workbook</a></div>
+  <span class="eyebrow">C++ Programming · Lesson after 2D Arrays</span>
+  <h1>Strings in C++ <span class="q">"text"</span></h1>
+  <p class="lede">A 90-minute lesson. Students learn to store, read and process text with <code>std::string</code>, then use it in six timed challenges and a password-checker project. Every solution below was compiled with g++ (no warnings), and every expected output comes from a real run.</p>
+  <div class="meta"><span><b>Length:</b> 90 min</span><span><b>Prior learning:</b> loops, 1D/2D arrays, functions, input validation loops</span><span><b>Work time:</b> 53 of 90 min</span></div>
+  <div class="two">
+    <div class="panel">
+      <span class="eyebrow">Learning objectives</span>
+      <ul>
+        <li>Choose between <code>cin &gt;&gt;</code> and <code>getline</code>, and avoid the getline trap</li>
+        <li>Index and loop through a string; build strings with <code>+=</code></li>
+        <li>Compare strings and use <code>substr</code>, <code>find</code>, <code>insert</code>, <code>erase</code>, <code>replace</code></li>
+        <li>Classify characters with <code>&lt;cctype&gt;</code></li>
+        <li>Write functions that take <code>const string&amp;</code> and return <code>string</code></li>
+      </ul>
+    </div>
+    <div class="panel">
+      <span class="eyebrow">Success criteria</span>
+      <ul>
+        <li><b>All students:</b> Challenges 1–3 working</li>
+        <li><b>Most students:</b> Challenge 4, and the project scores Weak / Medium / Strong correctly</li>
+        <li><b>Some students:</b> Challenge 5 or 6, and the full project with the confirm loop and tips</li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<section style="padding-top:1.75rem" id="plan">
+  <div class="sec-head"><h2>90-minute plan</h2></div>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Time</th><th>Phase</th><th>Teacher</th><th>Students</th></tr></thead>
+    <tbody>
+      <tr><td class="num">0:00–0:05</td><td>Warm-up</td><td>Show the code. Ask for predictions before anyone runs it. Take 2–3 answers.</td><td>Predict, then run and check</td></tr>
+      <tr><td class="num">0:05–0:20</td><td>Part A notes</td><td>Teach A1–A4. Live-demo the getline trap (see notes). Link <code>s[i]</code> back to arrays.</td><td>Follow along, type the A4 loop</td></tr>
+      <tr><td class="num">0:20–0:25</td><td>Challenge 1</td><td>Circulate. Look for <code>cin &gt;&gt;</code> used for the name.</td><td>Independent</td></tr>
+      <tr><td class="num">0:25–0:32</td><td>Challenge 2</td><td>Check that <code>isVowel</code> handles capitals.</td><td>Independent</td></tr>
+      <tr><td class="num">0:32–0:40</td><td>Challenge 3</td><td>At 0:38, show one student's reverse loop on the board.</td><td>Independent; extension for fast finishers</td></tr>
+      <tr><td class="num">0:40–0:52</td><td>Part B notes</td><td>Teach B1–B4. Ask: <span class="say">"Why is 'Zebra' &lt; 'apple'?"</span></td><td>Predict each row of the tools table</td></tr>
+      <tr><td class="num">0:52–0:59</td><td>Challenge 4</td><td>Remind them about <code>i == 0</code> before <code>name[i-1]</code>.</td><td>Independent</td></tr>
+      <tr><td class="num">0:59–1:07</td><td>Challenge 5</td><td>Point fast finishers to Challenge 6.</td><td>Independent or in pairs</td></tr>
+      <tr><td class="num">1:07–1:25</td><td>Mini-project</td><td>Brief for 2 min. Checkpoint at 1:15: <code>strength</code> should return correct scores.</td><td>Build in stages</td></tr>
+      <tr><td class="num">1:25–1:30</td><td>Exit ticket</td><td>Collect the answers. Use Q2 to see who understood the getline trap.</td><td>Answer 4 questions on paper</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout">
+    <span class="eyebrow">Pacing</span>
+    <p><b>Behind at 0:40?</b> Skip Challenge 3's extension and set Challenge 5 as homework. <b>Behind at 1:07?</b> Cut the project to <code>strength</code> + <code>rating</code> only, and leave the confirm loop for next lesson. <b>Ahead?</b> Challenge 6, then the project's "Going further".</p>
+  </div>
+</section>
+
+<nav class="toc" aria-label="Sections">
+  <a href="#warmup">Warm-up</a><a href="#partA">Part A notes</a>
+  <a href="#c1">Ch 1</a><a href="#c2">Ch 2</a><a href="#c3">Ch 3</a>
+  <a href="#partB">Part B notes</a>
+  <a href="#c4">Ch 4</a><a href="#c5">Ch 5</a><a href="#c6">Ch 6</a>
+  <a href="#project">Project + rubric</a><a href="#exit">Exit ticket answers</a><a href="#homework">Homework</a>
+</nav>
+
+<main>
+
+<section id="warmup">
+  <div class="sec-head"><span class="clock">0:00 · 5 min</span><h2>Warm-up: answer</h2></div>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+int main() {
+    string word = "LOOP";
+    int n = word.length();
+    for (int i = n - 1; i &gt;= 0; i--) {
+        cout &lt;&lt; word[i];
+    }
+    cout &lt;&lt; " " &lt;&lt; n &lt;&lt; endl;
+    return 0;
+}</code></pre>
+<pre class="run" data-label="Output"><code>POOL 4</code></pre>
+  <div class="panel notes">
+    <h4>Discussion</h4>
+    <ul>
+      <li>Students who answer <code>LOOP 4</code> missed that the loop counts down. Ask them to trace <code>i</code>: 3, 2, 1, 0.</li>
+      <li>Ask: <span class="say">"Why start at n − 1 and not n?"</span> This sets up the last-index rule for Challenge 1.</li>
+      <li>Point out that this is exactly how they looped through arrays. A string is a sequence of characters.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="partA">
+  <div class="sec-head"><span class="clock">0:05 · 15 min</span><h2>Part A: teaching notes</h2></div>
+  <div class="panel notes">
+    <h4>Live demo: the getline trap (3 min)</h4>
+    <p>Type this program and run it <b>without</b> the <code>cin.ignore</code> line first. The name comes out empty. Then add the line and run it again.</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+int main() {
+    int age;
+    string name;
+    cout &lt;&lt; "Age: ";
+    cin &gt;&gt; age;
+    cin.ignore(1000, '\n');   // throw away the Enter left behind
+    cout &lt;&lt; "Full name: ";
+    getline(cin, name);
+    cout &lt;&lt; name &lt;&lt; " is " &lt;&lt; age &lt;&lt; endl;
+}</code></pre>
+<pre class="run" data-label="Output with the ignore line"><code>Age: <span class="in">15</span>
+Full name: <span class="in">Ada Lovelace</span>
+Ada Lovelace is 15</code></pre>
+    <p>Explain it with the picture of an input "queue": <code>cin &gt;&gt; age</code> takes <code>15</code> and leaves the Enter (<code>\n</code>) behind. <code>getline</code> reads up to the first <code>\n</code> it finds, which is that leftover one, so it returns at once.</p>
+  </div>
+  <div class="panel notes">
+    <h4>Misconceptions to watch for</h4>
+    <ul>
+      <li><b><code>'a'</code> vs <code>"a"</code>:</b> single quotes are a <code>char</code>, double quotes are a <code>string</code>. <code>word[0] = "M";</code> will not compile.</li>
+      <li><b>Last index:</b> <code>word[word.length()]</code> is one past the end. Like arrays, there is no error message, just wrong results.</li>
+      <li><b>Spaces count:</b> <code>"Ada Lovelace".length()</code> is 12, not 11.</li>
+      <li><b><code>+</code> with two literals:</b> <code>"Hi" + "there"</code> does not compile. At least one side must be a <code>string</code> variable.</li>
+    </ul>
+  </div>
+  <div class="panel notes">
+    <h4>Questions to ask</h4>
+    <ul>
+      <li><span class="say">"What is <code>"CODE"[2]</code>?"</span> (D)</li>
+      <li><span class="say">"How would you print a string one character per line?"</span></li>
+      <li><span class="say">"If <code>result</code> starts as <code>""</code>, what is it after three <code>+= 'x'</code>?"</span> (xxx)</li>
+    </ul>
+  </div>
+</section>
+
+<section id="c1">
+  <div class="ch">
+    <div class="ch-head"><h3>Challenge 1 · Name card</h3><span class="pill e">easy</span><span class="pill time">5 min · 0:20</span></div>
+    <p class="skills"><b>Practises:</b> <code>getline</code>, <code>length()</code>, indexing, last index = n − 1</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+int main() {
+    string name;
+    cout &lt;&lt; "Enter your full name: ";
+    getline(cin, name);
+
+    int n = name.length();
+    cout &lt;&lt; "Hello, " &lt;&lt; name &lt;&lt; "!" &lt;&lt; endl;
+    cout &lt;&lt; "Your name has " &lt;&lt; n &lt;&lt; " characters (including spaces)." &lt;&lt; endl;
+    cout &lt;&lt; "First letter: " &lt;&lt; name[0] &lt;&lt; endl;
+    cout &lt;&lt; "Last letter: " &lt;&lt; name[n - 1] &lt;&lt; endl;
+    return 0;
+}</code></pre>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Input</th><th>Length</th><th>First</th><th>Last</th></tr></thead>
+      <tbody>
+        <tr><td><code>Ada Lovelace</code></td><td class="num">12</td><td>A</td><td>e</td></tr>
+        <tr><td><code>Kofi Annan Mensah</code></td><td class="num">17</td><td>K</td><td>h</td></tr>
+      </tbody>
+    </table></div>
+    <div class="panel notes">
+      <h4>Common mistakes</h4>
+      <ul>
+        <li>Using <code>cin &gt;&gt; name</code>: the output says "Hello, Ada!" with length 3.</li>
+        <li>Using <code>name[n]</code> for the last letter: prints nothing or a strange character.</li>
+      </ul>
+      <h4>Support · Stretch</h4>
+      <p><b>Support:</b> give them the <code>getline</code> line. <b>Stretch:</b> what happens if the user just presses Enter? (<code>n</code> is 0, so <code>name[n - 1]</code> reads outside the string.) Add an <code>if</code> to handle it.</p>
+    </div>
+  </div>
+</section>
+
+<section id="c2">
+  <div class="ch">
+    <div class="ch-head"><h3>Challenge 2 · Vowel counter</h3><span class="pill e">easy</span><span class="pill time">7 min · 0:25</span></div>
+    <p class="skills"><b>Practises:</b> looping through characters, <code>tolower</code>, <code>isalpha</code>, a <code>bool</code> helper function</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;cctype&gt;
+using namespace std;
+
+bool isVowel(char ch) {
+    ch = tolower(ch);
+    return ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u';
+}
+
+int main() {
+    string text;
+    cout &lt;&lt; "Enter a sentence: ";
+    getline(cin, text);
+
+    int vowels = 0, consonants = 0;
+    int n = text.length();
+    for (int i = 0; i &lt; n; i++) {
+        if (isVowel(text[i])) {
+            vowels++;
+        } else if (isalpha(text[i])) {
+            consonants++;
+        }
+    }
+    cout &lt;&lt; "Vowels: " &lt;&lt; vowels &lt;&lt; endl;
+    cout &lt;&lt; "Consonants: " &lt;&lt; consonants &lt;&lt; endl;
+    return 0;
+}</code></pre>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Input</th><th>Vowels</th><th>Consonants</th></tr></thead>
+      <tbody>
+        <tr><td><code>Programming in C++ is FUN</code></td><td class="num">6</td><td class="num">13</td></tr>
+        <tr><td><code>AEIOU aeiou</code></td><td class="num">10</td><td class="num">0</td></tr>
+        <tr><td><code>123 !!</code></td><td class="num">0</td><td class="num">0</td></tr>
+      </tbody>
+    </table></div>
+    <div class="panel notes">
+      <h4>Common mistakes</h4>
+      <ul>
+        <li>Counting every non-vowel as a consonant: spaces and <code>+</code> get counted. The first test gives 19 instead of 13.</li>
+        <li>Forgetting capitals: "FUN" adds no vowel, so the result is 5.</li>
+        <li>Writing <code>ch == 'a' || 'e' || ...</code>: always true. Each comparison needs its own <code>ch ==</code>.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="c3">
+  <div class="ch">
+    <div class="ch-head"><h3>Challenge 3 · Reverse and palindrome</h3><span class="pill m">medium</span><span class="pill time">8 min · 0:32</span></div>
+    <p class="skills"><b>Practises:</b> backwards loop, building a string with <code>+=</code>, returning a string, <code>==</code>. The solution includes the extension.</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;cctype&gt;
+using namespace std;
+
+string reverseWord(const string&amp; s) {
+    string result = "";
+    int n = s.length();
+    for (int i = n - 1; i &gt;= 0; i--) {
+        result += s[i];
+    }
+    return result;
+}
+
+string toLowerCase(string s) {
+    int n = s.length();
+    for (int i = 0; i &lt; n; i++) {
+        s[i] = tolower(s[i]);
+    }
+    return s;
+}
+
+int main() {
+    string word;
+    cout &lt;&lt; "Enter a word: ";
+    cin &gt;&gt; word;
+
+    string rev = reverseWord(word);
+    cout &lt;&lt; "Reversed: " &lt;&lt; rev &lt;&lt; endl;
+
+    if (toLowerCase(word) == toLowerCase(rev)) {
+        cout &lt;&lt; word &lt;&lt; " is a palindrome." &lt;&lt; endl;
+    } else {
+        cout &lt;&lt; word &lt;&lt; " is not a palindrome." &lt;&lt; endl;
+    }
+    return 0;
+}</code></pre>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Input</th><th>Reversed</th><th>Palindrome?</th></tr></thead>
+      <tbody>
+        <tr><td><code>level</code></td><td><code>level</code></td><td>yes</td></tr>
+        <tr><td><code>string</code></td><td><code>gnirts</code></td><td>no</td></tr>
+        <tr><td><code>Racecar</code></td><td><code>racecaR</code></td><td>yes (only with the extension)</td></tr>
+        <tr><td><code>a</code></td><td><code>a</code></td><td>yes</td></tr>
+      </tbody>
+    </table></div>
+    <div class="panel notes">
+      <h4>Teaching point</h4>
+      <p><code>toLowerCase(string s)</code> takes its parameter <b>by value</b> on purpose: it changes its own copy and leaves the original word alone. Compare this with <code>const string&amp;</code> in <code>reverseWord</code>, which only reads the word. This is a good moment for the B4 discussion.</p>
+    </div>
+  </div>
+</section>
+
+<section id="partB">
+  <div class="sec-head"><span class="clock">0:40 · 12 min</span><h2>Part B: teaching notes</h2></div>
+  <div class="panel notes">
+    <h4>Verified results for the tools table</h4>
+    <p>With <code>s = "COMPUTER"</code>: <code>substr(2, 3)</code> → <code>MPU</code>, <code>substr(4)</code> → <code>UTER</code>, <code>find("PUT")</code> → <code>3</code>, <code>find("U", 5)</code> → <code>npos</code> (the only U is at index 4). <code>"Hello World"</code> after <code>insert(5, ",")</code> → <code>Hello, World</code>, then <code>erase(0, 7)</code> → <code>World</code>. <code>"I like Java"</code> after <code>replace(7, 4, "C++")</code> → <code>I like C++</code>.</p>
+    <p>Run through the table as a quick-fire quiz: cover the Result column and ask students to predict each answer.</p>
+  </div>
+  <div class="panel notes">
+    <h4>Key explanations</h4>
+    <ul>
+      <li><b>Why "Zebra" &lt; "apple":</b> characters are compared by their codes (ASCII). 'A'–'Z' are 65–90 and 'a'–'z' are 97–122, so every capital comes first. To compare alphabetically regardless of case, convert both strings to lower case first.</li>
+      <li><b><code>string::npos</code>:</b> it is the largest possible <code>size_t</code> value. Store <code>find</code>'s result in a <code>size_t</code> (its real type) before comparing it with <code>npos</code>.</li>
+      <li><b><code>char(toupper(...))</code>:</b> <code>toupper</code> returns an <code>int</code>. <code>result += toupper(c)</code> compiles but relies on a conversion. The <code>char(...)</code> makes the intention clear.</li>
+      <li><b><code>const string&amp;</code>:</b> the <code>&amp;</code> means "use the original, don't copy" and <code>const</code> means "promise not to change it". Link this to <code>const int a[]</code> from the arrays lessons.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="c4">
+  <div class="ch">
+    <div class="ch-head"><h3>Challenge 4 · Initials</h3><span class="pill m">medium</span><span class="pill time">7 min · 0:52</span></div>
+    <p class="skills"><b>Practises:</b> detecting the start of a word, combined conditions, <code>toupper</code>, returning a string</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;cctype&gt;
+using namespace std;
+
+string initials(const string&amp; name) {
+    string result = "";
+    int n = name.length();
+    for (int i = 0; i &lt; n; i++) {
+        bool startOfWord = (i == 0 || name[i - 1] == ' ');
+        if (startOfWord &amp;&amp; name[i] != ' ') {
+            result += char(toupper(name[i]));
+            result += '.';
+        }
+    }
+    return result;
+}
+
+int main() {
+    string name;
+    cout &lt;&lt; "Enter a full name: ";
+    getline(cin, name);
+    cout &lt;&lt; "Initials: " &lt;&lt; initials(name) &lt;&lt; endl;
+    return 0;
+}</code></pre>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Input</th><th>Output</th></tr></thead>
+      <tbody>
+        <tr><td><code>theo kwame ayepeh</code></td><td><code>T.K.A.</code></td></tr>
+        <tr><td><code>&nbsp;&nbsp;ada&nbsp;&nbsp;&nbsp;lovelace&nbsp;</code></td><td><code>A.L.</code></td></tr>
+        <tr><td><code>KOFI</code></td><td><code>K.</code></td></tr>
+      </tbody>
+    </table></div>
+    <div class="panel notes">
+      <h4>Common mistakes</h4>
+      <ul>
+        <li>Reading <code>name[i - 1]</code> when <code>i</code> is 0. Short-circuit evaluation of <code>||</code> prevents this, because <code>i == 0</code> is checked first. Ask students why the order matters.</li>
+        <li>Forgetting <code>name[i] != ' '</code>: extra spaces produce <code>" ."</code> in the output.</li>
+        <li>A simpler approach that "works" on the first test only: take <code>name[0]</code>, then the character after each space. It fails on the double-space test, which is why that test is there.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="c5">
+  <div class="ch">
+    <div class="ch-head"><h3>Challenge 5 · Word counter</h3><span class="pill h">harder</span><span class="pill time">8 min · 0:59</span></div>
+    <p class="skills"><b>Practises:</b> building a word in a buffer, detecting where a word ends, keeping track of the "best so far"</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+int main() {
+    string text;
+    cout &lt;&lt; "Enter a sentence: ";
+    getline(cin, text);
+
+    int words = 0;
+    string current = "", longest = "";
+    int n = text.length();
+
+    for (int i = 0; i &lt; n; i++) {
+        if (text[i] != ' ') {
+            current += text[i];          // still inside a word
+        }
+        if (text[i] == ' ' || i == n - 1) {   // a word may have just ended
+            if (current != "") {
+                words++;
+                if (current.length() &gt; longest.length()) {
+                    longest = current;
+                }
+                current = "";
+            }
+        }
+    }
+    cout &lt;&lt; "Words: " &lt;&lt; words &lt;&lt; endl;
+    cout &lt;&lt; "Longest word: " &lt;&lt; longest &lt;&lt; endl;
+    return 0;
+}</code></pre>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Input</th><th>Words</th><th>Longest</th></tr></thead>
+      <tbody>
+        <tr><td><code>Strings make text processing easy</code></td><td class="num">5</td><td><code>processing</code></td></tr>
+        <tr><td><code>&nbsp;&nbsp;the&nbsp;&nbsp;&nbsp;quick brown&nbsp;&nbsp;fox&nbsp;</code></td><td class="num">4</td><td><code>quick</code> (first of the 5-letter words)</td></tr>
+        <tr><td><code>one</code></td><td class="num">1</td><td><code>one</code></td></tr>
+        <tr><td>(empty line)</td><td class="num">0</td><td>(empty)</td></tr>
+      </tbody>
+    </table></div>
+    <div class="panel notes">
+      <h4>Common mistakes</h4>
+      <ul>
+        <li>Counting spaces and adding 1: this breaks with extra spaces (the second test gives 10).</li>
+        <li>Missing the last word: if they only check for spaces, a sentence without a trailing space loses its final word. That's what the <code>i == n - 1</code> check is for.</li>
+        <li>Using <code>&gt;=</code> for longest: "brown" replaces "quick". This is not wrong, but it doesn't match the sample output.</li>
+      </ul>
+      <h4>Support</h4>
+      <p>Let weaker students do word counting only, and skip the longest word. Pairing works well here.</p>
+    </div>
+  </div>
+</section>
+
+<section id="c6">
+  <div class="ch">
+    <div class="ch-head"><h3>Challenge 6 · Word filter</h3><span class="pill x">extension</span><span class="pill time">early finishers</span></div>
+    <p class="skills"><b>Practises:</b> <code>find</code> with a start position, <code>replace</code>, <code>string::npos</code>, <code>size_t</code>, <code>string(n, ch)</code></p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+int main() {
+    string text, bad;
+    cout &lt;&lt; "Enter a sentence: ";
+    getline(cin, text);
+    cout &lt;&lt; "Word to hide: ";
+    getline(cin, bad);
+
+    string stars(bad.length(), '*');    // a string of * the same length as bad
+    int count = 0;
+
+    size_t pos = text.find(bad);
+    while (pos != string::npos) {
+        text.replace(pos, bad.length(), stars);
+        count++;
+        pos = text.find(bad, pos + bad.length());
+    }
+    cout &lt;&lt; text &lt;&lt; endl;
+    cout &lt;&lt; "Replaced " &lt;&lt; count &lt;&lt; " time(s)." &lt;&lt; endl;
+    return 0;
+}</code></pre>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Sentence</th><th>Word</th><th>Output</th><th>Count</th></tr></thead>
+      <tbody>
+        <tr><td><code>the cat sat on the mat with the other cat</code></td><td><code>cat</code></td><td><code>the *** sat on the mat with the other ***</code></td><td class="num">2</td></tr>
+        <tr><td><code>I love Java and Java loves me</code></td><td><code>Java</code></td><td><code>I love **** and **** loves me</code></td><td class="num">2</td></tr>
+        <tr><td><code>no match here</code></td><td><code>xyz</code></td><td><code>no match here</code></td><td class="num">0</td></tr>
+      </tbody>
+    </table></div>
+    <div class="panel notes">
+      <h4>Answer to "Think about it"</h4>
+      <p>With <code>at</code>, the program also hides the "at" inside <em>cat</em>, <em>sat</em> and <em>mat</em>, because <code>find</code> matches anywhere. One fix is to accept a match only when the characters before and after it are spaces or the ends of the string. This is the same start-of-word test as Challenge 4.</p>
+      <p><b>Type of <code>pos</code>:</b> students often write <code>int pos</code>. It usually still works, but the compiler warns about comparing signed and unsigned values. <code>size_t</code> is the type <code>find</code> really returns, so teach that.</p>
+    </div>
+  </div>
+</section>
+
+<section id="project">
+  <div class="sec-head"><span class="clock">1:07 · 18 min</span><h2>Mini-project: Password checker</h2></div>
+  <div class="panel notes">
+    <h4>Suggested build order (tell students)</h4>
+    <ol>
+      <li><b>By 1:15:</b> <code>strength</code> returns the correct score. Test it with a single call in <code>main</code>.</li>
+      <li><b>By 1:18:</b> <code>rating</code>, and the first <code>do-while</code> loop.</li>
+      <li><b>By 1:23:</b> the confirm loop and the hidden output.</li>
+      <li><b>Early finishers:</b> tips for each failed rule (the full solution below includes this).</li>
+    </ol>
+  </div>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;cctype&gt;
+using namespace std;
+
+// Returns a score from 0 to 5, one point per rule passed.
+int strength(const string&amp; pw) {
+    bool upper = false, lower = false, digit = false, symbol = false;
+    int n = pw.length();
+    for (int i = 0; i &lt; n; i++) {
+        char ch = pw[i];
+        if (isupper(ch)) upper = true;
+        else if (islower(ch)) lower = true;
+        else if (isdigit(ch)) digit = true;
+        else if (!isspace(ch)) symbol = true;
+    }
+    int score = 0;
+    if (n &gt;= 8) score++;
+    if (upper) score++;
+    if (lower) score++;
+    if (digit) score++;
+    if (symbol) score++;
+    return score;
+}
+
+string rating(int score) {
+    if (score == 5) return "Strong";
+    if (score &gt;= 3) return "Medium";
+    return "Weak";
+}
+
+void printTips(const string&amp; pw) {
+    bool upper = false, lower = false, digit = false, symbol = false;
+    int n = pw.length();
+    for (int i = 0; i &lt; n; i++) {
+        char ch = pw[i];
+        if (isupper(ch)) upper = true;
+        else if (islower(ch)) lower = true;
+        else if (isdigit(ch)) digit = true;
+        else if (!isspace(ch)) symbol = true;
+    }
+    if (n &lt; 8) cout &lt;&lt; "  - use at least 8 characters" &lt;&lt; endl;
+    if (!upper) cout &lt;&lt; "  - add a capital letter" &lt;&lt; endl;
+    if (!lower) cout &lt;&lt; "  - add a small letter" &lt;&lt; endl;
+    if (!digit) cout &lt;&lt; "  - add a digit" &lt;&lt; endl;
+    if (!symbol) cout &lt;&lt; "  - add a symbol such as ! or #" &lt;&lt; endl;
+}
+
+int main() {
+    string pw;
+    int score;
+    do {
+        cout &lt;&lt; "Choose a password: ";
+        getline(cin, pw);
+        score = strength(pw);
+        cout &lt;&lt; "Strength: " &lt;&lt; rating(score) &lt;&lt; " (" &lt;&lt; score &lt;&lt; "/5)" &lt;&lt; endl;
+        if (score &lt; 5) {
+            cout &lt;&lt; "To make it stronger:" &lt;&lt; endl;
+            printTips(pw);
+        }
+    } while (score &lt; 5);
+
+    string again;
+    do {
+        cout &lt;&lt; "Type it again to confirm: ";
+        getline(cin, again);
+        if (again != pw) cout &lt;&lt; "They do not match. Try again." &lt;&lt; endl;
+    } while (again != pw);
+
+    cout &lt;&lt; "Password saved. Hidden: " &lt;&lt; string(pw.length(), '*') &lt;&lt; endl;
+    return 0;
+}</code></pre>
+  <p>Output of the full solution for the sample inputs (<code>hello</code>, <code>Hello2024</code>, <code>Hello#2024</code>, <code>Hello#2025</code>, <code>Hello#2024</code>):</p>
+<pre class="run" data-label="Output"><code>Choose a password: <span class="in">hello</span>
+Strength: Weak (1/5)
+To make it stronger:
+  - use at least 8 characters
+  - add a capital letter
+  - add a digit
+  - add a symbol such as ! or #
+Choose a password: <span class="in">Hello2024</span>
+Strength: Medium (4/5)
+To make it stronger:
+  - add a symbol such as ! or #
+Choose a password: <span class="in">Hello#2024</span>
+Strength: Strong (5/5)
+Type it again to confirm: <span class="in">Hello#2025</span>
+They do not match. Try again.
+Type it again to confirm: <span class="in">Hello#2024</span>
+Password saved. Hidden: **********</code></pre>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Test password</th><th>Score</th><th>Rating</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td><code>hello</code></td><td class="num">1</td><td>Weak</td><td>small letters only, too short</td></tr>
+      <tr><td><code>Password1</code></td><td class="num">4</td><td>Medium</td><td>no symbol</td></tr>
+      <tr><td><code>Hello#2024</code></td><td class="num">5</td><td>Strong</td><td>passes every rule</td></tr>
+      <tr><td><code>Pass word#1</code></td><td class="num">5</td><td>Strong</td><td>the space is not counted as a symbol; <code>getline</code> keeps it</td></tr>
+    </tbody>
+  </table></div>
+  <div class="panel">
+    <span class="eyebrow">Marking rubric · 10 marks</span>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Criterion</th><th>Marks</th></tr></thead>
+      <tbody>
+        <tr><td><code>strength</code> loops through the password and detects upper, lower, digit and symbol correctly</td><td class="num">3</td></tr>
+        <tr><td>Length rule and total score correct (0–5)</td><td class="num">1</td></tr>
+        <tr><td><code>rating</code> returns Weak / Medium / Strong for the right ranges</td><td class="num">1</td></tr>
+        <tr><td><code>do-while</code> repeats until the password is Strong</td><td class="num">2</td></tr>
+        <tr><td>Confirm loop repeats until the two passwords match</td><td class="num">1</td></tr>
+        <tr><td>Hidden output uses one star per character</td><td class="num">1</td></tr>
+        <tr><td>Uses <code>const string&amp;</code>, sensible names and comments</td><td class="num">1</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="panel notes">
+    <h4>Common mistakes</h4>
+    <ul>
+      <li>Adding a point inside the loop for every capital found. <code>"HELLO"</code> then scores 5+. The <code>bool</code> flags stop this.</li>
+      <li>Testing for a symbol with <code>!isalnum(ch)</code> alone: a space then counts as a symbol. Exclude <code>isspace</code> as well.</li>
+      <li>Using <code>cin &gt;&gt; pw</code>: <code>Pass word#1</code> is read as "Pass".</li>
+    </ul>
+  </div>
+</section>
+
+<section id="exit">
+  <div class="sec-head"><span class="clock">1:25 · 5 min</span><h2>Exit ticket answers</h2></div>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>#</th><th>Question</th><th>Answer</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td><code>"COMPUTER".substr(3, 4)</code></td><td><code>"PUTE"</code> (start at index 3, take 4 characters)</td></tr>
+      <tr><td class="num">2</td><td>Why is the name empty after <code>cin &gt;&gt; age;</code>?</td><td>The Enter after the age is still in the input, so <code>getline</code> reads an empty line. Fix: <code>cin.ignore(1000, '\n');</code> before <code>getline</code>.</td></tr>
+      <tr><td class="num">3</td><td>What does <code>find</code> return when not found?</td><td><code>string::npos</code></td></tr>
+      <tr><td class="num">4</td><td>Capitalise the first letter of <code>w</code></td><td><code>w[0] = toupper(w[0]);</code></td></tr>
+    </tbody>
+  </table></div>
+  <p><b>Reading the results:</b> students who miss Q1 need more practice with <code>substr</code>; start the next lesson with two quick ones. Students who miss Q2 will lose marks in any program that mixes number and text input, so revisit the getline trap with them.</p>
+</section>
+
+<section id="homework">
+  <div class="sec-head"><h2>Homework (about 30 min)</h2></div>
+  <ol>
+    <li>Finish any challenge not done in class.</li>
+    <li><b>Caesar cipher:</b> read a message and a shift (1–25). Print the message with every letter moved forward by the shift, wrapping Z back to A. Keep spaces and punctuation unchanged. Example: <code>Hello, World!</code> with shift 3 → <code>Khoor, Zruog!</code></li>
+    <li>Remember the getline trap: the program reads the shift (a number) and the message (a line).</li>
+  </ol>
+  <details><summary>Caesar cipher core idea (for marking)</summary><div>
+<pre><code class="language-cpp">if (isupper(ch))      ch = char('A' + (ch - 'A' + shift) % 26);
+else if (islower(ch)) ch = char('a' + (ch - 'a' + shift) % 26);</code></pre>
+  </div></details>
+</section>
+
+</main>
+<footer>
+  <span>C++ Programming · Strings · Teacher guide</span>
+  <span>Next lesson: vectors (<code>std::vector</code>), the arrays that can grow.</span>
+</footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" data-manual></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+<script>
+try { if (window.Prism) Prism.highlightAll(); } catch (e) {}
+</script>
